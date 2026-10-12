@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Live wedding keyboardist in Virginia Beach and Hampton Roads. Every heartbeat. Every step. Every note. A moment to last.">
 <title>Buachie Entertainment</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap">
 
@@ -27,8 +34,19 @@
     --card-bg: #231f17; --border: #3a3022; color-scheme: dark;
   }
 
+  /* Brand constants — the hero and nav stay black & gold in every theme,
+     matching the Showbride banner so expo visitors recognize the brand. */
+  :root {
+    --ink: #0a0a0a;
+    --ink2: #161208;
+    --cream: #f3ecd9;
+    --cream2: #b9ac8e;
+    --gold-hi: #e8c96a;
+    --nav-h: 52px;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
   body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
@@ -41,9 +59,10 @@
   nav {
     position: sticky;
     top: env(safe-area-inset-top, 0px);
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 20px;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    height: var(--nav-h);
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,7 +72,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     letter-spacing: 0.04em;
-    color: var(--fg);
+    color: var(--cream);
     text-decoration: none;
   }
 
@@ -72,7 +91,7 @@
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--fg);
+    background: var(--cream);
     border-radius: 2px;
     transition: all 0.25s;
   }
@@ -84,11 +103,12 @@
   .nav-drawer {
     display: none;
     flex-direction: column;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    background: var(--ink);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
     padding: 0 20px;
-    position: sticky;
-    top: calc(env(safe-area-inset-top, 0px) + 51px);
+    position: fixed;
+    left: 0; right: 0;
+    top: calc(env(safe-area-inset-top, 0px) + var(--nav-h));
     z-index: 99;
   }
   .nav-drawer.open { display: flex; }
@@ -97,62 +117,92 @@
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--fg2);
+    color: var(--cream2);
     text-decoration: none;
     padding: 16px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
   }
   .nav-drawer a:last-child { border-bottom: none; }
   .nav-drawer a:active { color: var(--gold); }
 
-  /* ── HERO ─────────────────────────────────── */
+  /* ── HERO — full screen, black & gold ─────── */
   .hero {
-    background: var(--bg2);
-    padding: 60px 20px 56px;
+    min-height: calc(100vh - var(--nav-h));
+    min-height: calc(100svh - var(--nav-h));
+    background: linear-gradient(170deg, var(--ink) 0%, var(--ink2) 100%);
+    color: var(--cream);
+    padding: 48px 20px 40px;
     text-align: center;
-    border-bottom: 1px solid var(--border);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+  /* Soft warm glow behind the words — candlelight, not spotlight */
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    background: radial-gradient(ellipse 70% 45% at 50% 45%, rgba(201,168,76,0.16) 0%, transparent 70%);
     pointer-events: none;
+    animation: glow 4.8s ease-in-out infinite;
   }
+  @keyframes glow { 0%,100% { opacity: .7; } 50% { opacity: 1; } }
+  .hero > * { position: relative; }
+  .hero .hero-btns { width: 100%; }
   .hero-eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 14px;
+    margin-bottom: 28px;
   }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 9vw, 4rem);
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    color: var(--fg);
-    margin-bottom: 16px;
-    text-wrap: balance;
+    font-weight: 400;
+    font-size: clamp(2.3rem, 10vw, 4.2rem);
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 28px;
   }
-  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero h1 .beat { display: block; }
+  .hero h1 .beat.last {
+    font-style: italic;
+    color: var(--gold-hi);
+    margin-top: 0.25em;
+  }
   .hero-sub {
-    font-size: 1rem;
-    color: var(--fg2);
-    margin: 0 auto 18px;
+    font-size: 0.95rem;
+    color: var(--cream2);
+    margin: 0 auto 36px;
     text-wrap: balance;
-    max-width: 360px;
+    max-width: 340px;
   }
-  .hero-location {
-    font-size: 0.82rem;
+  .hero-more {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 0.85rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--fg2);
-    margin-bottom: 32px;
+    color: var(--cream2);
+    text-decoration: none;
+    padding: 8px;
   }
+  .hero-more span { display: inline-block; animation: nudge 2.4s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  /* Lines arrive one beat at a time */
+  .reveal { opacity: 0; transform: translateY(12px); animation: rise .9s ease-out forwards; }
+  .d1 { animation-delay: .2s; } .d2 { animation-delay: .9s; } .d3 { animation-delay: 1.6s; }
+  .d4 { animation-delay: 2.5s; } .d5 { animation-delay: 3.2s; } .d6 { animation-delay: 3.6s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; opacity: 1; transform: none; }
+    .hero::before, .hero-more span { animation: none; }
+  }
+
   /* Stack CTA buttons */
   .hero-btns {
     display: flex;
@@ -421,11 +471,42 @@
     opacity: 0.5;
     border-radius: 1px;
   }
+  /* ── ABOUT → PACKAGES bridge ──────────────── */
+  .about-bridge {
+    display: block;
+    margin-top: 32px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 10px;
+  }
+
+  /* ── SECTION SNAPPING (phones & tablets) ──────
+     Each section is a "screen". Hero and About can't be skipped by a
+     fast flick (snap-stop: always). Long sections (Packages, Booking)
+     scroll freely inside; the page only settles at section starts. */
+  @media (max-width: 820px) {
+    html { scroll-snap-type: y mandatory; }
+    .snap { scroll-snap-align: start; }
+    .hero, #about { scroll-snap-stop: always; }
+    #about {
+      min-height: calc(100svh - var(--nav-h));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    footer { scroll-snap-align: end; }
+  }
 </style>
+</head>
+<body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-brand">Buachie Entertainment</a>
+  <a href="#top" class="nav-brand">Buachie Entertainment</a>
   <button class="hamburger" id="menuBtn" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -440,19 +521,23 @@
 </div>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">Live Wedding Keyboard Music</div>
-  <h1>Your Wedding Day Deserves <em>Live Music</em></h1>
-  <p class="hero-sub">Elegant, heartfelt piano and keyboard performances tailored to every moment of your special day.</p>
-  <p class="hero-location">📍 Hampton Roads, Virginia &amp; surrounding areas</p>
-  <div class="hero-btns">
-    <a href="#book" class="btn">Request a Quote</a>
-    <a href="#packages" class="btn btn-outline">View Packages</a>
+<div class="hero snap" id="top">
+  <div class="hero-eyebrow reveal d1">Live Wedding Keyboardist</div>
+  <h1>
+    <span class="beat reveal d1">Every heartbeat.</span>
+    <span class="beat reveal d2">Every step.</span>
+    <span class="beat reveal d3">Every note.</span>
+    <span class="beat last reveal d4">A moment to last.</span>
+  </h1>
+  <p class="hero-sub reveal d5">Live piano for the walk down the aisle, the first kiss, and everything after.</p>
+  <div class="hero-btns reveal d6">
+    <a href="#book" class="btn">Check My Date</a>
   </div>
+  <a href="#about" class="hero-more reveal d6">Meet your musician <span>↓</span></a>
 </div>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="snap">
   <div class="section-label">About</div>
   <h2>Music that moves with your moment</h2>
   <div class="gold-divider"></div>
@@ -491,10 +576,11 @@
       </div>
     </div>
   </div>
+  <a href="#packages" class="about-bridge">See how we can make your day unforgettable ↓</a>
 </section>
 
 <!-- PACKAGES -->
-<div class="packages-bg" id="packages">
+<div class="packages-bg snap" id="packages">
   <div class="packages-inner">
     <div class="section-label">Pricing</div>
     <h2>Packages &amp; Pricing</h2>
@@ -561,7 +647,7 @@
 </div>
 
 <!-- BOOKING FORM -->
-<section id="book">
+<section id="book" class="snap">
   <div class="section-label">Booking</div>
   <h2>Request a Quote</h2>
   <div class="gold-divider"></div>
@@ -627,7 +713,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="snap">
   <div class="section-label">Contact</div>
   <h2>Let's connect</h2>
   <div class="gold-divider"></div>
@@ -713,3 +799,5 @@
     } catch(err) {}
   });
 </script>
+</body>
+</html>
