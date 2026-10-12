@@ -16,29 +16,15 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #16130e;
-      --bg2: #1e1a13;
-      --fg: #f0ead8;
-      --fg2: #a89878;
-      --gold: #d4a94e;
-      --gold-dark: #c9a84c;
-      --ivory: #1e1a13;
-      --card-bg: #231f17;
-      --border: #3a3022;
-      color-scheme: dark;
+      --bg: #16130e; --bg2: #1e1a13; --fg: #f0ead8; --fg2: #a89878;
+      --gold: #d4a94e; --gold-dark: #c9a84c; --ivory: #1e1a13;
+      --card-bg: #231f17; --border: #3a3022; color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #16130e;
-    --bg2: #1e1a13;
-    --fg: #f0ead8;
-    --fg2: #a89878;
-    --gold: #d4a94e;
-    --gold-dark: #c9a84c;
-    --ivory: #1e1a13;
-    --card-bg: #231f17;
-    --border: #3a3022;
-    color-scheme: dark;
+    --bg: #16130e; --bg2: #1e1a13; --fg: #f0ead8; --fg2: #a89878;
+    --gold: #d4a94e; --gold-dark: #c9a84c; --ivory: #1e1a13;
+    --card-bg: #231f17; --border: #3a3022; color-scheme: dark;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,13 +37,13 @@
     padding-inline: 0;
   }
 
-  /* NAV */
+  /* ── NAV ─────────────────────────────────── */
   nav {
     position: sticky;
     top: env(safe-area-inset-top, 0px);
     background: var(--bg);
     border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -65,27 +51,64 @@
   }
   .nav-brand {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    letter-spacing: 0.05em;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
     color: var(--fg);
     text-decoration: none;
   }
-  .nav-links { display: flex; gap: 24px; }
-  .nav-links a {
-    font-size: 0.85rem;
+
+  /* Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--fg);
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Slide-down mobile menu */
+  .nav-drawer {
+    display: none;
+    flex-direction: column;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    position: sticky;
+    top: calc(env(safe-area-inset-top, 0px) + 51px);
+    z-index: 99;
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    font-size: 1rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--fg2);
     text-decoration: none;
-    transition: color 0.2s;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
   }
-  .nav-links a:hover { color: var(--gold); }
+  .nav-drawer a:last-child { border-bottom: none; }
+  .nav-drawer a:active { color: var(--gold); }
 
-  /* HERO */
+  /* ── HERO ─────────────────────────────────── */
   .hero {
     background: var(--bg2);
-    padding: 80px 24px 72px;
+    padding: 60px 20px 56px;
     text-align: center;
     border-bottom: 1px solid var(--border);
     position: relative;
@@ -95,155 +118,155 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-eyebrow {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.6rem, 7vw, 5rem);
+    font-size: clamp(2.2rem, 9vw, 4rem);
     line-height: 1.1;
     letter-spacing: -0.01em;
     color: var(--fg);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     text-wrap: balance;
   }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
   .hero-sub {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--fg2);
-    max-width: 480px;
-    margin: 0 auto 32px;
+    margin: 0 auto 18px;
     text-wrap: balance;
+    max-width: 360px;
   }
   .hero-location {
     font-size: 0.82rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--fg2);
-    margin-bottom: 36px;
+    margin-bottom: 32px;
+  }
+  /* Stack CTA buttons */
+  .hero-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
   .btn {
-    display: inline-block;
-    padding: 14px 36px;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 16px 24px;
     background: var(--gold);
     color: #1a1200;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
+    text-align: center;
     border-radius: 2px;
-    transition: background 0.2s, transform 0.1s;
     border: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s;
   }
-  .btn:hover { background: var(--gold-dark); transform: translateY(-1px); }
+  .btn:active { background: var(--gold-dark); }
   .btn-outline {
     background: transparent;
     color: var(--gold);
     border: 1.5px solid var(--gold);
-    margin-left: 12px;
   }
-  .btn-outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-1px); }
+  .btn-outline:active { background: rgba(201,168,76,0.1); }
 
-  /* DIVIDER */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 0 auto 48px;
-    max-width: 220px;
+  /* ── SECTION BASE ─────────────────────────── */
+  section {
+    padding: 56px 20px;
+    max-width: 600px;
+    margin: 0 auto;
   }
-  .divider-line { flex: 1; height: 1px; background: var(--border); }
-  .divider-icon { color: var(--gold); font-size: 1.1rem; }
-
-  /* SECTIONS */
-  section { padding: 72px 24px; max-width: 960px; margin: 0 auto; }
   .section-label {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
     line-height: 1.15;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     text-wrap: balance;
   }
   .section-intro {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--fg2);
-    max-width: 560px;
-    margin-bottom: 48px;
+    margin-bottom: 36px;
+    line-height: 1.65;
   }
 
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .about-text p { color: var(--fg2); margin-bottom: 16px; line-height: 1.75; }
+  /* ── ABOUT — single column ────────────────── */
+  .about-text p { color: var(--fg2); margin-bottom: 14px; line-height: 1.75; font-size: 0.95rem; }
   .about-text p:last-child { margin-bottom: 0; }
+
   .about-highlights {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 32px;
+    padding: 24px;
+    margin-top: 32px;
   }
   .highlight-item {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: flex-start;
     padding: 14px 0;
     border-bottom: 1px solid var(--border);
   }
+  .highlight-item:first-child { padding-top: 0; }
   .highlight-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .highlight-icon { color: var(--gold); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-  .highlight-text { font-size: 0.92rem; color: var(--fg2); line-height: 1.5; }
+  .highlight-icon { color: var(--gold); font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+  .highlight-text { font-size: 0.9rem; color: var(--fg2); line-height: 1.5; }
   .highlight-text strong { color: var(--fg); display: block; margin-bottom: 2px; }
 
-  /* PACKAGES */
-  .packages-bg { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .packages-inner { max-width: 960px; margin: 0 auto; padding: 72px 24px; }
+  /* ── PACKAGES — full-width strip + single col ─ */
+  .packages-bg {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .packages-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 56px 20px;
+  }
   .packages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   .package-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 28px 24px;
+    padding: 24px 20px;
     position: relative;
-    transition: box-shadow 0.2s, border-color 0.2s;
   }
-  .package-card:hover { border-color: var(--gold); box-shadow: 0 4px 24px rgba(201,168,76,0.1); }
-  .package-card.featured {
-    border-color: var(--gold);
-    box-shadow: 0 4px 24px rgba(201,168,76,0.12);
-  }
+  .package-card.featured { border-color: var(--gold); }
   .package-tag {
     position: absolute;
     top: -11px;
-    left: 20px;
+    left: 16px;
     background: var(--gold);
     color: #1a1200;
     font-size: 0.68rem;
@@ -253,33 +276,30 @@
     padding: 3px 10px;
     border-radius: 2px;
   }
+  .package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
   .package-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-    margin-bottom: 6px;
   }
   .package-price {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: var(--gold);
     letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
     line-height: 1;
-    margin-bottom: 4px;
   }
-  .package-price span { font-size: 1rem; font-weight: 400; color: var(--fg2); }
-  .package-desc { font-size: 0.85rem; color: var(--fg2); line-height: 1.55; margin: 14px 0 0; }
-  .package-includes {
-    list-style: none;
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
+  .package-desc { font-size: 0.85rem; color: var(--fg2); line-height: 1.5; margin-bottom: 12px; }
+  .package-includes { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .package-includes li {
     font-size: 0.83rem;
     color: var(--fg2);
-    padding-left: 18px;
+    padding-left: 16px;
     position: relative;
   }
   .package-includes li::before {
@@ -287,33 +307,33 @@
     position: absolute;
     left: 0;
     color: var(--gold);
-    font-size: 0.6rem;
-    top: 4px;
+    font-size: 0.55rem;
+    top: 5px;
   }
   .add-on-note {
-    margin-top: 28px;
-    padding: 18px 20px;
+    margin-top: 24px;
+    padding: 16px 18px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-left: 3px solid var(--gold);
     border-radius: 2px;
     font-size: 0.87rem;
     color: var(--fg2);
+    line-height: 1.6;
   }
   .add-on-note strong { color: var(--fg); }
 
-  /* BOOKING FORM */
+  /* ── BOOKING FORM ─────────────────────────── */
   .form-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 40px;
-    max-width: 680px;
+    padding: 28px 20px;
   }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  /* All fields full-width, stacked */
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
   .form-group label {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -323,25 +343,23 @@
   .form-group select,
   .form-group textarea {
     font-family: 'Inter', sans-serif;
-    font-size: 0.92rem;
+    font-size: 1rem; /* 16px prevents iOS zoom */
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 2px;
-    padding: 11px 14px;
+    padding: 13px 14px;
     color: var(--fg);
     transition: border-color 0.2s;
     width: 100%;
+    -webkit-appearance: none;
   }
   .form-group input:focus,
   .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--gold);
-  }
-  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group textarea:focus { outline: none; border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
   .form-group select { appearance: none; cursor: pointer; }
-  .form-submit { width: 100%; padding: 15px; font-size: 0.95rem; margin-top: 4px; }
-  .form-note { font-size: 0.8rem; color: var(--fg2); margin-top: 16px; text-align: center; }
+  .form-submit { width: 100%; padding: 16px; font-size: 1rem; margin-top: 4px; }
+  .form-note { font-size: 0.78rem; color: var(--fg2); margin-top: 14px; text-align: center; }
   .form-success {
     display: none;
     background: rgba(201,168,76,0.1);
@@ -353,13 +371,7 @@
   }
   .form-success h3 { font-family: 'Playfair Display', serif; margin-bottom: 8px; color: var(--gold); }
 
-  /* CONTACT */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-  }
+  /* ── CONTACT ──────────────────────────────── */
   .contact-item {
     display: flex;
     gap: 16px;
@@ -367,69 +379,65 @@
     margin-bottom: 28px;
   }
   .contact-icon { color: var(--gold); font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
-  .contact-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg2); margin-bottom: 4px; }
+  .contact-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg2); margin-bottom: 4px; }
   .contact-value { font-size: 1rem; color: var(--fg); font-weight: 500; }
   .contact-value a { color: var(--gold); text-decoration: none; }
   .service-areas {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 28px;
+    padding: 24px;
   }
-  .service-areas h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-  }
+  .service-areas h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 14px; }
   .area-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .area-list li { font-size: 0.88rem; color: var(--fg2); padding-left: 18px; position: relative; }
-  .area-list li::before { content: '♦'; position: absolute; left: 0; color: var(--gold); font-size: 0.6rem; top: 4px; }
+  .area-list li::before { content: '♦'; position: absolute; left: 0; color: var(--gold); font-size: 0.55rem; top: 5px; }
 
-  /* FOOTER */
+  /* ── FOOTER ───────────────────────────────── */
   footer {
     background: var(--bg2);
     border-top: 1px solid var(--border);
-    padding: 40px 24px;
+    padding: 40px 20px;
     text-align: center;
   }
-  .footer-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    margin-bottom: 8px;
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
+  .footer-tagline { font-size: 0.82rem; color: var(--fg2); margin-bottom: 20px; line-height: 1.5; }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 20px;
   }
-  .footer-tagline { font-size: 0.85rem; color: var(--fg2); margin-bottom: 20px; }
-  .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; }
   .footer-links a { font-size: 0.82rem; color: var(--fg2); text-decoration: none; }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-copy { font-size: 0.75rem; color: var(--fg2); }
+  .footer-copy { font-size: 0.72rem; color: var(--fg2); }
 
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    nav { padding: 14px 16px; }
-    .nav-links { display: none; }
-    .hero { padding: 60px 16px 56px; }
-    section { padding: 56px 16px; }
-    .about-grid { grid-template-columns: 1fr; gap: 32px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 0; }
-    .form-row { grid-template-columns: 1fr; }
-    .form-card { padding: 28px 20px; }
-    .packages-inner { padding: 56px 16px; }
-    .btn-outline { margin-left: 0; margin-top: 12px; display: block; text-align: center; }
-    .hero-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .hero-btns .btn, .hero-btns .btn-outline { margin: 0; display: block; width: 100%; max-width: 260px; text-align: center; }
+  /* ── GOLD DIVIDER ─────────────────────────── */
+  .gold-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    opacity: 0.5;
+    border-radius: 1px;
   }
 </style>
 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-brand">Buachie Entertainment</a>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#packages">Packages</a>
-    <a href="#book">Book Now</a>
-    <a href="#contact">Contact</a>
-  </div>
+  <button class="hamburger" id="menuBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- SLIDE-DOWN DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#packages" onclick="closeMenu()">Packages</a>
+  <a href="#book" onclick="closeMenu()">Book Now</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -447,40 +455,39 @@
 <section id="about">
   <div class="section-label">About</div>
   <h2>Music that moves with your moment</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm Joshua Seth-Buachie, a professional keyboardist based in Virginia Beach specializing in live wedding music. Whether it's the processional that brings your guests to tears or the cocktail hour soundtrack that sets the mood for the reception, I bring warmth, precision, and a personal touch to every performance.</p>
-      <p>With Buachie Entertainment, you get a musician who listens — to your story, your song choices, and the feeling you want your guests to carry home.</p>
-      <p>Dress rehearsals are always included at no additional charge. Your confidence on the big day is part of the service.</p>
+  <div class="gold-divider"></div>
+  <div class="about-text">
+    <p>I'm Joshua Seth-Buachie, a professional keyboardist based in Virginia Beach specializing in live wedding music. Whether it's the processional that brings your guests to tears or the cocktail hour soundtrack that sets the mood for the reception, I bring warmth, precision, and a personal touch to every performance.</p>
+    <p>With Buachie Entertainment, you get a musician who listens — to your story, your song choices, and the feeling you want your guests to carry home.</p>
+    <p>Dress rehearsals are always included at no additional charge. Your confidence on the big day is part of the service.</p>
+  </div>
+  <div class="about-highlights">
+    <div class="highlight-item">
+      <div class="highlight-icon">🎹</div>
+      <div class="highlight-text">
+        <strong>Live Keyboard Performance</strong>
+        Ceremony, cocktail hour, and full-event coverage available
+      </div>
     </div>
-    <div class="about-highlights">
-      <div class="highlight-item">
-        <div class="highlight-icon">🎹</div>
-        <div class="highlight-text">
-          <strong>Live Keyboard Performance</strong>
-          Ceremony, cocktail hour, and full-event coverage available
-        </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">🎤</div>
+      <div class="highlight-text">
+        <strong>Additional Musicians</strong>
+        Add a live drummer or guitarist to elevate any package
       </div>
-      <div class="highlight-item">
-        <div class="highlight-icon">🎤</div>
-        <div class="highlight-text">
-          <strong>Additional Musicians</strong>
-          Add a live drummer or guitarist to elevate any package
-        </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">📋</div>
+      <div class="highlight-text">
+        <strong>Dress Rehearsal Included</strong>
+        Always at no extra charge — peace of mind is part of the deal
       </div>
-      <div class="highlight-item">
-        <div class="highlight-icon">📋</div>
-        <div class="highlight-text">
-          <strong>Dress Rehearsal Included</strong>
-          Always at no extra charge — peace of mind is part of the deal
-        </div>
-      </div>
-      <div class="highlight-item">
-        <div class="highlight-icon">📍</div>
-        <div class="highlight-text">
-          <strong>Hampton Roads &amp; Beyond</strong>
-          Available throughout Hampton Roads; travel outside area available
-        </div>
+    </div>
+    <div class="highlight-item">
+      <div class="highlight-icon">📍</div>
+      <div class="highlight-text">
+        <strong>Hampton Roads &amp; Beyond</strong>
+        Available throughout Hampton Roads; travel outside area available
       </div>
     </div>
   </div>
@@ -491,11 +498,14 @@
   <div class="packages-inner">
     <div class="section-label">Pricing</div>
     <h2>Packages &amp; Pricing</h2>
+    <div class="gold-divider"></div>
     <p class="section-intro">Simple, transparent pricing — pick the coverage that fits your day. All packages include a complimentary dress rehearsal.</p>
     <div class="packages-grid">
       <div class="package-card">
-        <div class="package-name">Ceremony</div>
-        <div class="package-price">$350</div>
+        <div class="package-header">
+          <div class="package-name">Ceremony</div>
+          <div class="package-price">$350</div>
+        </div>
         <div class="package-desc">Ceremony music only, keyboard not included (you provide or rent separately).</div>
         <ul class="package-includes">
           <li>Prelude &amp; processional music</li>
@@ -504,8 +514,10 @@
         </ul>
       </div>
       <div class="package-card">
-        <div class="package-name">Ceremony + Keys</div>
-        <div class="package-price">$400</div>
+        <div class="package-header">
+          <div class="package-name">Ceremony + Keys</div>
+          <div class="package-price">$400</div>
+        </div>
         <div class="package-desc">Everything in Ceremony, plus Joshua brings and sets up his own keyboard.</div>
         <ul class="package-includes">
           <li>Keyboard provided &amp; set up</li>
@@ -515,8 +527,10 @@
       </div>
       <div class="package-card featured">
         <div class="package-tag">Most Popular</div>
-        <div class="package-name">Ceremony &amp; Cocktail</div>
-        <div class="package-price">$800</div>
+        <div class="package-header">
+          <div class="package-name">Ceremony &amp; Cocktail</div>
+          <div class="package-price">$800</div>
+        </div>
         <div class="package-desc">Full ceremony coverage plus live keyboard during cocktail hour — solo performance.</div>
         <ul class="package-includes">
           <li>Keyboard provided &amp; set up</li>
@@ -526,8 +540,10 @@
         </ul>
       </div>
       <div class="package-card">
-        <div class="package-name">Full Event</div>
-        <div class="package-price">$2,000</div>
+        <div class="package-header">
+          <div class="package-name">Full Event</div>
+          <div class="package-price">$2,000</div>
+        </div>
         <div class="package-desc">Complete wedding music from start to finish — ceremony through reception.</div>
         <ul class="package-includes">
           <li>Keyboard provided &amp; set up</li>
@@ -537,10 +553,8 @@
         </ul>
       </div>
     </div>
-
     <div class="add-on-note">
-      <strong>Add a live musician to any package:</strong> Enhance your cocktail hour or reception with a live drummer or guitarist for an additional <strong>+$550 per musician</strong>. Perfect for couples who want that full-band energy.
-      <br><br>
+      <strong>Add a live musician to any package:</strong> Enhance your cocktail hour or reception with a live drummer or guitarist for an additional <strong>+$550 per musician</strong>.<br><br>
       <strong>Outside Hampton Roads:</strong> An additional $60 travel fee applies for events beyond the Hampton Roads area.
     </div>
   </div>
@@ -550,39 +564,33 @@
 <section id="book">
   <div class="section-label">Booking</div>
   <h2>Request a Quote</h2>
+  <div class="gold-divider"></div>
   <p class="section-intro">Tell me about your wedding day and I'll follow up within 24 hours to confirm availability and answer any questions.</p>
-
   <div class="form-card">
     <form id="bookingForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="fname">First Name *</label>
-          <input type="text" id="fname" name="fname" required placeholder="Jane">
-        </div>
-        <div class="form-group">
-          <label for="lname">Last Name *</label>
-          <input type="text" id="lname" name="lname" required placeholder="Smith">
-        </div>
+      <div class="form-group">
+        <label for="fname">First Name *</label>
+        <input type="text" id="fname" name="fname" required placeholder="Jane" autocomplete="given-name">
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" name="email" required placeholder="jane@example.com">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="(757) 555-0000">
-        </div>
+      <div class="form-group">
+        <label for="lname">Last Name *</label>
+        <input type="text" id="lname" name="lname" required placeholder="Smith" autocomplete="family-name">
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="weddingDate">Wedding Date *</label>
-          <input type="date" id="weddingDate" name="weddingDate" required>
-        </div>
-        <div class="form-group">
-          <label for="venue">Venue / Location *</label>
-          <input type="text" id="venue" name="venue" required placeholder="Virginia Beach, VA">
-        </div>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required placeholder="jane@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(757) 555-0000" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label for="weddingDate">Wedding Date *</label>
+        <input type="date" id="weddingDate" name="weddingDate" required>
+      </div>
+      <div class="form-group">
+        <label for="venue">Venue / Location *</label>
+        <input type="text" id="venue" name="venue" required placeholder="Virginia Beach, VA">
       </div>
       <div class="form-group">
         <label for="package">Package Interest *</label>
@@ -622,50 +630,47 @@
 <section id="contact">
   <div class="section-label">Contact</div>
   <h2>Let's connect</h2>
-  <div class="contact-grid">
+  <div class="gold-divider"></div>
+  <div class="contact-item">
+    <div class="contact-icon">📞</div>
     <div>
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div>
-          <div class="contact-label">Phone / Text</div>
-          <div class="contact-value">757-439-5879</div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">✉️</div>
-        <div>
-          <div class="contact-label">Email</div>
-          <div class="contact-value">joshuaseth1@msn.com</div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📸</div>
-        <div>
-          <div class="contact-label">Instagram</div>
-          <div class="contact-value"><a href="https://instagram.com/sethbuachie" target="_blank">@sethbuachie</a></div>
-        </div>
-      </div>
+      <div class="contact-label">Phone / Text</div>
+      <div class="contact-value">757-606-0878</div>
     </div>
-    <div class="service-areas">
-      <h3>Service Areas</h3>
-      <ul class="area-list">
-        <li>Virginia Beach</li>
-        <li>Norfolk</li>
-        <li>Chesapeake</li>
-        <li>Hampton</li>
-        <li>Newport News</li>
-        <li>Portsmouth</li>
-        <li>Suffolk</li>
-        <li>Surrounding areas (+$60 travel)</li>
-      </ul>
+  </div>
+  <div class="contact-item">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value">buachieent@gmail.com</div>
     </div>
+  </div>
+  <div class="contact-item">
+    <div class="contact-icon">📸</div>
+    <div>
+      <div class="contact-label">Instagram</div>
+      <div class="contact-value"><a href="https://instagram.com/sethbuachie" target="_blank">@sethbuachie</a></div>
+    </div>
+  </div>
+  <div class="service-areas">
+    <h3>Service Areas</h3>
+    <ul class="area-list">
+      <li>Virginia Beach</li>
+      <li>Norfolk</li>
+      <li>Chesapeake</li>
+      <li>Hampton</li>
+      <li>Newport News</li>
+      <li>Portsmouth</li>
+      <li>Suffolk</li>
+      <li>Surrounding areas (+$60 travel)</li>
+    </ul>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Buachie Entertainment</div>
-  <div class="footer-tagline">Live Wedding Keyboard Music · Hampton Roads, Virginia</div>
+  <div class="footer-tagline">Live Wedding Keyboard Music<br>Hampton Roads, Virginia</div>
   <div class="footer-links">
     <a href="#about">About</a>
     <a href="#packages">Packages</a>
@@ -676,12 +681,21 @@
 </footer>
 
 <script>
+  const btn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('navDrawer');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    drawer.classList.toggle('open');
+  });
+  function closeMenu() {
+    btn.classList.remove('open');
+    drawer.classList.remove('open');
+  }
+
   document.getElementById('bookingForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this);
     const data = Object.fromEntries(formData);
-
-    // Build mailto body
     const body = `New Booking Request from Buachie Entertainment Website\n\n`
       + `Name: ${data.fname} ${data.lname}\n`
       + `Email: ${data.email}\n`
@@ -691,16 +705,11 @@
       + `Package: ${data.package}\n`
       + `Additional Musicians: ${data.musicians}\n`
       + `Song Requests / Notes:\n${data.songRequests || 'None'}`;
-
-    // Show success message
     this.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
-
-    // Also attempt to pre-fill a mailto link (may not work in all contexts)
     try {
       const subject = encodeURIComponent(`Wedding Inquiry — ${data.fname} ${data.lname} — ${data.weddingDate}`);
-      const bodyEnc = encodeURIComponent(body);
-      window.location.href = `mailto:joshuaseth1@msn.com?subject=${subject}&body=${bodyEnc}`;
-    } catch(err) { /* silent fallback */ }
+      window.location.href = `mailto:buachieent@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+    } catch(err) {}
   });
 </script>
