@@ -408,6 +408,18 @@
   .form-group textarea:focus { outline: none; border-color: var(--gold); }
   .form-group textarea { resize: vertical; min-height: 110px; }
   .form-group select { appearance: none; cursor: pointer; }
+  .rush-flag {
+    display: none;
+    font-size: 0.83rem;
+    color: var(--fg2);
+    line-height: 1.5;
+    background: rgba(201,168,76,0.1);
+    border-left: 3px solid var(--gold);
+    padding: 10px 12px;
+    border-radius: 2px;
+  }
+  .rush-flag.show { display: block; }
+  .rush-flag strong { color: var(--fg); }
   .form-submit { width: 100%; padding: 16px; font-size: 1rem; margin-top: 4px; }
   .form-note { font-size: 0.78rem; color: var(--fg2); margin-top: 14px; text-align: center; }
   .form-success {
@@ -569,6 +581,13 @@
       </div>
     </div>
     <div class="highlight-item">
+      <div class="highlight-icon">⚡</div>
+      <div class="highlight-text">
+        <strong>Last-Minute Bookings Welcome</strong>
+        Wedding in less than two weeks? Rush booking is available
+      </div>
+    </div>
+    <div class="highlight-item">
       <div class="highlight-icon">📍</div>
       <div class="highlight-text">
         <strong>Hampton Roads &amp; Beyond</strong>
@@ -641,6 +660,7 @@
     </div>
     <div class="add-on-note">
       <strong>Add a live musician to any package:</strong> Enhance your cocktail hour or reception with a live drummer or guitarist for an additional <strong>+$550 per musician</strong>.<br><br>
+      <strong>Rush booking:</strong> Wedding less than 14 days away? I can still make it happen. A <strong>+20% rush fee</strong> applies to the package price to cover learning your music and clearing my schedule on short notice. Example: Ceremony $350 → $420.<br><br>
       <strong>Outside Hampton Roads:</strong> An additional $60 travel fee applies for events beyond the Hampton Roads area.
     </div>
   </div>
@@ -673,6 +693,7 @@
       <div class="form-group">
         <label for="weddingDate">Wedding Date *</label>
         <input type="date" id="weddingDate" name="weddingDate" required>
+        <p class="rush-flag" id="rushFlag"><strong>Rush booking:</strong> your date is less than 14 days away, so a +20% rush fee applies to your package. Include your song list in the notes below so I can start preparing right away.</p>
       </div>
       <div class="form-group">
         <label for="venue">Venue / Location *</label>
@@ -778,15 +799,33 @@
     drawer.classList.remove('open');
   }
 
+  // Rush booking: weddings less than 14 days out
+  const RUSH_DAYS = 14;
+  const dateInput = document.getElementById('weddingDate');
+  const rushFlag = document.getElementById('rushFlag');
+  function isRush(value) {
+    if (!value) return false;
+    const [y, m, d] = value.split('-').map(Number);
+    const wedding = new Date(y, m - 1, d);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const days = Math.round((wedding - today) / 86400000);
+    return days >= 0 && days < RUSH_DAYS;
+  }
+  dateInput.addEventListener('change', () => {
+    rushFlag.classList.toggle('show', isRush(dateInput.value));
+  });
+
   document.getElementById('bookingForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this);
     const data = Object.fromEntries(formData);
+    const rush = isRush(data.weddingDate);
     const body = `New Booking Request from Buachie Entertainment Website\n\n`
       + `Name: ${data.fname} ${data.lname}\n`
       + `Email: ${data.email}\n`
       + `Phone: ${data.phone || 'Not provided'}\n`
-      + `Wedding Date: ${data.weddingDate}\n`
+      + `Wedding Date: ${data.weddingDate}${rush ? '  ** RUSH BOOKING (+20%) **' : ''}\n`
       + `Venue: ${data.venue}\n`
       + `Package: ${data.package}\n`
       + `Additional Musicians: ${data.musicians}\n`
@@ -794,7 +833,7 @@
     this.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
     try {
-      const subject = encodeURIComponent(`Wedding Inquiry — ${data.fname} ${data.lname} — ${data.weddingDate}`);
+      const subject = encodeURIComponent(`${rush ? 'RUSH — ' : ''}Wedding Inquiry —${data.fname} ${data.lname} — ${data.weddingDate}`);
       window.location.href = `mailto:buachieent@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
     } catch(err) {}
   });
