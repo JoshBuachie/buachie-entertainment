@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
-<meta name="description" content="Live wedding keyboardist in Virginia Beach and Hampton Roads. Every heartbeat. Every step. Every note. A moment to last.">
+<meta name="description" content="Live wedding keyboardist in Virginia Beach and Hampton Roads. Live music that follows your moment, from the walk down the aisle to the last dance.">
 <title>Buachie Entertainment</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap">
 
@@ -289,6 +289,92 @@
   .highlight-text { font-size: 0.9rem; color: var(--fg2); line-height: 1.5; }
   .highlight-text strong { color: var(--fg); display: block; margin-bottom: 2px; }
 
+  /* ── WHY LIVE — the positioning section ───── */
+  .why-bg {
+    background: linear-gradient(170deg, var(--ink) 0%, var(--ink2) 100%);
+    color: var(--cream);
+  }
+  .why-bg section { padding-top: 64px; padding-bottom: 64px; }
+  .why-bg h2 { color: var(--cream); }
+  .contrast {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 8px 0 40px;
+  }
+  .contrast-row {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+  }
+  .contrast-row:last-child { border-bottom: none; }
+  .contrast-who {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    margin-bottom: 6px;
+  }
+  .contrast-line {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.35rem, 5.5vw, 1.8rem);
+    line-height: 1.25;
+    color: var(--cream2);
+  }
+  .contrast-row.live .contrast-who { color: var(--gold); }
+  .contrast-row.live .contrast-line { color: var(--gold-hi); font-style: italic; }
+
+  .story {
+    border-left: 2px solid var(--gold);
+    padding: 4px 0 4px 20px;
+  }
+  .story-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .story p {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .story p.kicker {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-hi);
+    margin-bottom: 0;
+  }
+  .why-points {
+    list-style: none;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .why-points li {
+    font-size: 0.88rem;
+    color: var(--cream2);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .why-points li::before {
+    content: '♦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.55rem;
+    top: 6px;
+  }
+  .why-points strong { color: var(--cream); font-weight: 500; }
+
+  /* ── REVIEWS — hidden until the GigSalad widget is pasted in ── */
+  .reviews:has(#gigsalad-reviews:empty) { display: none; }
+
   /* ── PACKAGES — full-width strip + single col ─ */
   .packages-bg {
     background: var(--bg2);
@@ -380,7 +466,6 @@
     border-radius: 4px;
     padding: 28px 20px;
   }
-  /* All fields full-width, stacked */
   .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
   .form-group label {
     font-size: 0.78rem;
@@ -483,7 +568,9 @@
     opacity: 0.5;
     border-radius: 1px;
   }
-  /* ── ABOUT → PACKAGES bridge ──────────────── */
+  .why-bg .gold-divider { margin: 0 0 28px; opacity: 0.7; }
+
+  /* ── Section bridges ──────────────────────── */
   .about-bridge {
     display: block;
     margin-top: 32px;
@@ -496,14 +583,11 @@
     padding: 10px;
   }
 
-  /* ── SECTION SNAPPING (phones & tablets) ──────
-     Each section is a "screen". Hero and About can't be skipped by a
-     fast flick (snap-stop: always). Long sections (Packages, Booking)
-     scroll freely inside; the page only settles at section starts. */
+  /* ── SECTION SNAPPING (phones & tablets) ────── */
   @media (max-width: 820px) {
     html { scroll-snap-type: y mandatory; }
     .snap { scroll-snap-align: start; }
-    .hero, #about { scroll-snap-stop: always; }
+    .hero, #about, #why { scroll-snap-stop: always; }
     #about {
       min-height: calc(100svh - var(--nav-h));
       display: flex;
@@ -527,6 +611,7 @@
 <!-- SLIDE-DOWN DRAWER -->
 <div class="nav-drawer" id="navDrawer">
   <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#why" onclick="closeMenu()">Why Live Music</a>
   <a href="#packages" onclick="closeMenu()">Packages</a>
   <a href="#book" onclick="closeMenu()">Book Now</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
@@ -541,7 +626,7 @@
     <span class="beat reveal d3">Every note.</span>
     <span class="beat last reveal d4">A moment to last.</span>
   </h1>
-  <p class="hero-sub reveal d5">Live piano for the walk down the aisle, the first kiss, and everything after.</p>
+  <p class="hero-sub reveal d5">Live music that follows your moment, from the walk down the aisle to the last dance.</p>
   <div class="hero-btns reveal d6">
     <a href="#book" class="btn">Check My Date</a>
   </div>
@@ -595,7 +680,52 @@
       </div>
     </div>
   </div>
-  <a href="#packages" class="about-bridge">See how we can make your day unforgettable ↓</a>
+  <a href="#why" class="about-bridge">Why live music changes the moment ↓</a>
+</section>
+
+<!-- WHY LIVE MUSIC -->
+<div class="why-bg snap" id="why">
+  <section>
+    <div class="section-label">Why Live Music</div>
+    <h2>The music follows your moment</h2>
+    <div class="gold-divider"></div>
+
+    <div class="contrast">
+      <div class="contrast-row">
+        <div class="contrast-who">With a playlist</div>
+        <div class="contrast-line">Your moment follows the music.</div>
+      </div>
+      <div class="contrast-row live">
+        <div class="contrast-who">With live music</div>
+        <div class="contrast-line">The music follows your moment.</div>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="story-label">From a real ceremony</div>
+      <p>The ring bearer froze halfway down the aisle. So I kept playing, softly and patiently, for as long as he needed.</p>
+      <p>The song ended the moment the rings reached the officiant. Nobody noticed the music adjusting.</p>
+      <p class="kicker">They just remember a little boy taking his time.</p>
+    </div>
+
+    <ul class="why-points">
+      <li><strong>No awkward cutoffs.</strong> If the walk runs long, the music stretches with it instead of stopping or restarting.</li>
+      <li><strong>Endings that land.</strong> The last note arrives with the kiss, the rings, or the final step, not a second early.</li>
+      <li><strong>Played for this day.</strong> Your songs, arranged for your ceremony and rehearsed with you beforehand.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- REVIEWS — paste the GigSalad Reviews Widget code inside the div below.
+     The whole section stays hidden until the div has content. -->
+<section id="reviews" class="reviews snap">
+  <div class="section-label">Reviews</div>
+  <h2>What couples say</h2>
+  <div class="gold-divider"></div>
+  <div id="gigsalad-reviews">
+    <div id="gigsalad-reviews-widget"></div>
+    <script>var gsReviewWidget;(function(d,t){var s=d.createElement(t),options={path:'129777',maxWidth:600,count:4};s.src='https://www.gigsalad.com/js/gigsalad-reviews-widget.min.js';s.onload=s.onreadystatechange=function(){var rs=this.readyState;if(rs)if(rs!='complete')if(rs!='loaded')return;try{gsReviewWidget=new GsReviewsWidget(options);gsReviewWidget.display();}catch(e){}};var scr=d.getElementsByTagName(t)[0];var par=scr.parentNode;par.insertBefore(s,scr);})(document,'script');</script>
+  </div>
 </section>
 
 <!-- PACKAGES -->
@@ -777,9 +907,10 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Buachie Entertainment</div>
-  <div class="footer-tagline">Live Wedding Keyboard Music<br>Hampton Roads, Virginia</div>
+  <div class="footer-tagline">The music follows your moment.<br>Live wedding keyboard · Hampton Roads, Virginia</div>
   <div class="footer-links">
     <a href="#about">About</a>
+    <a href="#why">Why Live</a>
     <a href="#packages">Packages</a>
     <a href="#book">Book Now</a>
     <a href="#contact">Contact</a>
@@ -833,7 +964,7 @@
     this.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
     try {
-      const subject = encodeURIComponent(`${rush ? 'RUSH — ' : ''}Wedding Inquiry —${data.fname} ${data.lname} — ${data.weddingDate}`);
+      const subject = encodeURIComponent(`${rush ? 'RUSH — ' : ''}Wedding Inquiry — ${data.fname} ${data.lname} — ${data.weddingDate}`);
       window.location.href = `mailto:buachieent@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
     } catch(err) {}
   });
