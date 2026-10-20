@@ -230,6 +230,7 @@
     transition: background 0.2s;
   }
   .btn:active { background: var(--gold-dark); }
+  .btn:disabled { opacity: 0.6; cursor: wait; }
   .btn-outline {
     background: transparent;
     color: var(--gold);
@@ -493,6 +494,7 @@
   .form-group textarea:focus { outline: none; border-color: var(--gold); }
   .form-group textarea { resize: vertical; min-height: 110px; }
   .form-group select { appearance: none; cursor: pointer; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .rush-flag {
     display: none;
     font-size: 0.83rem;
@@ -505,18 +507,29 @@
   }
   .rush-flag.show { display: block; }
   .rush-flag strong { color: var(--fg); }
-  .form-submit { width: 100%; padding: 16px; font-size: 1rem; margin-top: 4px; }
+  .form-submit { width: 100%; max-width: none; padding: 16px; font-size: 1rem; margin-top: 4px; }
   .form-note { font-size: 0.78rem; color: var(--fg2); margin-top: 14px; text-align: center; }
-  .form-success {
+  .form-success, .form-error {
     display: none;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid var(--gold);
     border-radius: 4px;
     padding: 24px;
     text-align: center;
     margin-top: 20px;
   }
+  .form-success {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--gold);
+  }
   .form-success h3 { font-family: 'Playfair Display', serif; margin-bottom: 8px; color: var(--gold); }
+  .form-error {
+    background: rgba(180,60,40,0.08);
+    border: 1px solid rgba(180,60,40,0.5);
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  .form-error a { color: var(--gold); font-weight: 600; }
 
   /* ── CONTACT ──────────────────────────────── */
   .contact-item {
@@ -613,7 +626,7 @@
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#why" onclick="closeMenu()">Why Live Music</a>
   <a href="#packages" onclick="closeMenu()">Packages</a>
-  <a href="#book" onclick="closeMenu()">Book Now</a>
+  <a href="#book" onclick="closeMenu()">Check My Date</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
@@ -716,8 +729,7 @@
   </section>
 </div>
 
-<!-- REVIEWS — paste the GigSalad Reviews Widget code inside the div below.
-     The whole section stays hidden until the div has content. -->
+<!-- REVIEWS — GigSalad Reviews Widget -->
 <section id="reviews" class="reviews snap">
   <div class="section-label">Reviews</div>
   <h2>What couples say</h2>
@@ -799,11 +811,11 @@
 <!-- BOOKING FORM -->
 <section id="book" class="snap">
   <div class="section-label">Booking</div>
-  <h2>Request a Quote</h2>
+  <h2>Check Your Date</h2>
   <div class="gold-divider"></div>
-  <p class="section-intro">Tell me about your wedding day and I'll follow up within 24 hours to confirm availability and answer any questions.</p>
+  <p class="section-intro">Tell me about your wedding day and I'll follow up within 24 hours to confirm I'm available and answer any questions.</p>
   <div class="form-card">
-    <form id="bookingForm">
+    <form id="bookingForm" novalidate>
       <div class="form-group">
         <label for="fname">First Name *</label>
         <input type="text" id="fname" name="fname" required placeholder="Jane" autocomplete="given-name">
@@ -833,30 +845,36 @@
         <label for="package">Package Interest *</label>
         <select id="package" name="package" required>
           <option value="" disabled selected>Select a package…</option>
-          <option value="ceremony-no-keys">Ceremony — $350 (no keyboard provided)</option>
-          <option value="ceremony-keys">Ceremony + Keys — $400</option>
-          <option value="ceremony-cocktail">Ceremony &amp; Cocktail Hour — $800</option>
-          <option value="full-event">Full Event — $2,000</option>
-          <option value="unsure">Not sure yet — let's talk!</option>
+          <option value="Ceremony — $350 (no keyboard)">Ceremony — $350 (no keyboard provided)</option>
+          <option value="Ceremony + Keys — $400">Ceremony + Keys — $400</option>
+          <option value="Ceremony & Cocktail Hour — $800">Ceremony &amp; Cocktail Hour — $800</option>
+          <option value="Full Event — $2,000">Full Event — $2,000</option>
+          <option value="Not sure yet">Not sure yet — let's talk!</option>
         </select>
       </div>
       <div class="form-group">
         <label for="musicians">Additional Musicians?</label>
         <select id="musicians" name="musicians">
-          <option value="none">No additional musicians</option>
-          <option value="drummer">+ Live Drummer (+$550)</option>
-          <option value="vocalist">+ Live Vocalist (+$550) </option>
-          <option value="both">+ Drummer &amp; Vocalist (+$1,100)</option>
+          <option value="None">No additional musicians</option>
+          <option value="Drummer (+$550)">+ Live Drummer (+$550)</option>
+          <option value="Vocalist (+$550)">+ Live Vocalist (+$550)</option>
+          <option value="Drummer & Vocalist (+$1,100)">+ Drummer &amp; Vocalist (+$1,100)</option>
         </select>
       </div>
       <div class="form-group">
         <label for="songRequests">Song Requests / Notes</label>
         <textarea id="songRequests" name="songRequests" placeholder="Processional song, first dance ideas, anything special you'd like…"></textarea>
       </div>
-      <button type="submit" class="btn form-submit">Send My Request</button>
+      <!-- Spam trap: real people never see or fill this -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="_honey">Leave blank</label>
+        <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
+      </div>
+      <button type="submit" class="btn form-submit" id="submitBtn">Check My Date</button>
       <p class="form-note">I'll respond within 24 hours. No obligation to book.</p>
+      <div class="form-error" id="formError" role="alert"></div>
     </form>
-    <div class="form-success" id="formSuccess">
+    <div class="form-success" id="formSuccess" role="status">
       <h3>Request Received! 🎹</h3>
       <p>Thank you for reaching out. I'll be in touch within 24 hours to confirm availability and answer any questions about your special day.</p>
     </div>
@@ -872,21 +890,21 @@
     <div class="contact-icon">📞</div>
     <div>
       <div class="contact-label">Phone / Text</div>
-      <div class="contact-value">757-606-0878</div>
+      <div class="contact-value"><a href="tel:7576060878">757-606-0878</a></div>
     </div>
   </div>
   <div class="contact-item">
     <div class="contact-icon">✉️</div>
     <div>
       <div class="contact-label">Email</div>
-      <div class="contact-value">buachieent@gmail.com</div>
+      <div class="contact-value"><a href="mailto:buachieent@gmail.com">buachieent@gmail.com</a></div>
     </div>
   </div>
   <div class="contact-item">
     <div class="contact-icon">📸</div>
     <div>
       <div class="contact-label">Instagram</div>
-      <div class="contact-value"><a href="https://instagram.com/sethbuachie" target="_blank">@sethbuachie</a></div>
+      <div class="contact-value"><a href="https://instagram.com/sethbuachie" target="_blank" rel="noopener">@sethbuachie</a></div>
     </div>
   </div>
   <div class="service-areas">
@@ -912,7 +930,7 @@
     <a href="#about">About</a>
     <a href="#why">Why Live</a>
     <a href="#packages">Packages</a>
-    <a href="#book">Book Now</a>
+    <a href="#book">Check My Date</a>
     <a href="#contact">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Buachie Entertainment · Joshua Seth-Buachie · All rights reserved</div>
@@ -947,26 +965,65 @@
     rushFlag.classList.toggle('show', isRush(dateInput.value));
   });
 
-  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  // Booking form — sends directly to buachieent@gmail.com via FormSubmit.
+  // Success only shows AFTER the request is confirmed sent.
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/buachieent@gmail.com';
+  const form = document.getElementById('bookingForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorBox = document.getElementById('formError');
+
+  function showError(html) {
+    errorBox.innerHTML = html;
+    errorBox.style.display = 'block';
+  }
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
+    errorBox.style.display = 'none';
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form));
+    if (data._honey) return; // bot
+
     const rush = isRush(data.weddingDate);
-    const body = `New Booking Request from Buachie Entertainment Website\n\n`
-      + `Name: ${data.fname} ${data.lname}\n`
-      + `Email: ${data.email}\n`
-      + `Phone: ${data.phone || 'Not provided'}\n`
-      + `Wedding Date: ${data.weddingDate}${rush ? '  ** RUSH BOOKING (+20%) **' : ''}\n`
-      + `Venue: ${data.venue}\n`
-      + `Package: ${data.package}\n`
-      + `Additional Musicians: ${data.musicians}\n`
-      + `Song Requests / Notes:\n${data.songRequests || 'None'}`;
-    this.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+    const payload = {
+      _subject: `${rush ? 'RUSH — ' : ''}Wedding Inquiry — ${data.fname} ${data.lname} — ${data.weddingDate}`,
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: data.email,
+      Name: `${data.fname} ${data.lname}`,
+      Email: data.email,
+      Phone: data.phone || 'Not provided',
+      'Wedding Date': data.weddingDate + (rush ? '  ** RUSH BOOKING (+20%) **' : ''),
+      Venue: data.venue,
+      Package: data.package,
+      'Additional Musicians': data.musicians,
+      'Song Requests / Notes': data.songRequests || 'None'
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
     try {
-      const subject = encodeURIComponent(`${rush ? 'RUSH — ' : ''}Wedding Inquiry — ${data.fname} ${data.lname} — ${data.weddingDate}`);
-      window.location.href = `mailto:buachieent@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
-    } catch(err) {}
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false || json.success === 'false') throw new Error('send failed');
+
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Check My Date';
+      showError('Sorry, your request didn\'t go through. Please text or call <a href="tel:7576060878">757-606-0878</a> or email <a href="mailto:buachieent@gmail.com">buachieent@gmail.com</a> and I\'ll get right back to you.');
+    }
   });
 </script>
 </body>
