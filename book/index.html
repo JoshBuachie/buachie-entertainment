@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://buachie-ent.com/book/">
+<meta name="description" content="Check your wedding date with Live wedding keyboardist in Virginia Beach and Hampton Roads. Live music that follows your moment, from the walk down the aisle to the last dance.">
+<title>Check Your Date · Buachie Entertainment</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap">
+
+<style>
+  :root {
+    --bg: #faf8f5;
+    --bg2: #f2ede4;
+    --fg: #1a1612;
+    --fg2: #5a5046;
+    --gold: #c9a84c;
+    --gold-dark: #a8853a;
+    --ivory: #fffdf7;
+    --card-bg: #ffffff;
+    --border: #e8dfc8;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16130e; --bg2: #1e1a13; --fg: #f0ead8; --fg2: #a89878;
+      --gold: #d4a94e; --gold-dark: #c9a84c; --ivory: #1e1a13;
+      --card-bg: #231f17; --border: #3a3022; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16130e; --bg2: #1e1a13; --fg: #f0ead8; --fg2: #a89878;
+    --gold: #d4a94e; --gold-dark: #c9a84c; --ivory: #1e1a13;
+    --card-bg: #231f17; --border: #3a3022; color-scheme: dark;
+  }
+
+  /* Brand constants — the hero and nav stay black & gold in every theme,
+     matching the Showbride banner so expo visitors recognize the brand. */
+  :root {
+    --ink: #0a0a0a;
+    --ink2: #161208;
+    --cream: #f3ecd9;
+    --cream2: #b9ac8e;
+    --gold-hi: #e8c96a;
+    --nav-h: 52px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    padding-inline: 0;
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position: relative;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: var(--ink);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    height: var(--nav-h);
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--cream);
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Slide-down mobile menu */
+  .nav-drawer {
+    display: none;
+    flex-direction: column;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    padding: 0 20px;
+    position: absolute;
+    left: 0; right: 0;
+    top: calc(env(safe-area-inset-top, 0px) + var(--nav-h));
+    z-index: 99;
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-drawer a:last-child { border-bottom: none; }
+  .nav-drawer a:active { color: var(--gold); }
+
+  /* ── HERO — full screen, black & gold ─────── */
+  .hero {
+    min-height: calc(100vh - var(--nav-h));
+    min-height: calc(100svh - var(--nav-h));
+    background: linear-gradient(170deg, var(--ink) 0%, var(--ink2) 100%);
+    color: var(--cream);
+    padding: 48px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Soft warm glow behind the words — candlelight, not spotlight */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 45% at 50% 45%, rgba(201,168,76,0.16) 0%, transparent 70%);
+    pointer-events: none;
+    animation: glow 4.8s ease-in-out infinite;
+  }
+  @keyframes glow { 0%,100% { opacity: .7; } 50% { opacity: 1; } }
+  .hero > * { position: relative; }
+  .hero .hero-btns { width: 100%; }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(2.3rem, 10vw, 4.2rem);
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+  .hero h1 .beat { display: block; }
+  .hero h1 .beat.last {
+    font-style: italic;
+    color: var(--gold-hi);
+    margin-top: 0.25em;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    color: var(--cream2);
+    margin: 0 auto 36px;
+    text-wrap: balance;
+    max-width: 340px;
+  }
+  .hero-more {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--cream2);
+    text-decoration: none;
+    padding: 8px;
+  }
+  .hero-more span { display: inline-block; animation: nudge 2.4s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  /* Lines arrive one beat at a time */
+  .reveal { opacity: 0; transform: translateY(12px); animation: rise .9s ease-out forwards; }
+  .d1 { animation-delay: .2s; } .d2 { animation-delay: .9s; } .d3 { animation-delay: 1.6s; }
+  .d4 { animation-delay: 2.5s; } .d5 { animation-delay: 3.2s; } .d6 { animation-delay: 3.6s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: none; opacity: 1; transform: none; }
+    .hero::before, .hero-more span { animation: none; }
+  }
+
+  /* Stack CTA buttons */
+  .hero-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 16px 24px;
+    background: var(--gold);
+    color: #1a1200;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s;
+  }
+  .btn:active { background: var(--gold-dark); }
+  .btn:disabled { opacity: 0.6; cursor: wait; }
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+  }
+  .btn-outline:active { background: rgba(201,168,76,0.1); }
+
+  /* ── SECTION BASE ─────────────────────────── */
+  section {
+    padding: 56px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+    line-height: 1.15;
+    margin-bottom: 14px;
+    text-wrap: balance;
+  }
+  .section-intro {
+    font-size: 0.95rem;
+    color: var(--fg2);
+    margin-bottom: 36px;
+    line-height: 1.65;
+  }
+
+  /* ── ABOUT — single column ────────────────── */
+  .about-text p { color: var(--fg2); margin-bottom: 14px; line-height: 1.75; font-size: 0.95rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-highlights {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    margin-top: 32px;
+  }
+  .highlight-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .highlight-item:first-child { padding-top: 0; }
+  .highlight-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .highlight-icon { color: var(--gold); font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+  .highlight-text { font-size: 0.9rem; color: var(--fg2); line-height: 1.5; }
+  .highlight-text strong { color: var(--fg); display: block; margin-bottom: 2px; }
+
+  /* ── WHY LIVE — the positioning section ───── */
+  .why-bg {
+    background: linear-gradient(170deg, var(--ink) 0%, var(--ink2) 100%);
+    color: var(--cream);
+  }
+  .why-bg section { padding-top: 64px; padding-bottom: 64px; }
+  .why-bg h2 { color: var(--cream); }
+  .contrast {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 8px 0 40px;
+  }
+  .contrast-row {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+  }
+  .contrast-row:last-child { border-bottom: none; }
+  .contrast-who {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    margin-bottom: 6px;
+  }
+  .contrast-line {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.35rem, 5.5vw, 1.8rem);
+    line-height: 1.25;
+    color: var(--cream2);
+  }
+  .contrast-row.live .contrast-who { color: var(--gold); }
+  .contrast-row.live .contrast-line { color: var(--gold-hi); font-style: italic; }
+
+  .story {
+    border-left: 2px solid var(--gold);
+    padding: 4px 0 4px 20px;
+  }
+  .story-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .story p {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .story p.kicker {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-hi);
+    margin-bottom: 0;
+  }
+  .why-points {
+    list-style: none;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .why-points li {
+    font-size: 0.88rem;
+    color: var(--cream2);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .why-points li::before {
+    content: '♦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.55rem;
+    top: 6px;
+  }
+  .why-points strong { color: var(--cream); font-weight: 500; }
+
+  /* ── REVIEWS — hidden until the GigSalad widget is pasted in ── */
+  .reviews:has(#gigsalad-reviews:empty) { display: none; }
+
+  /* ── PACKAGES — full-width strip + single col ─ */
+  .packages-bg {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .packages-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 56px 20px;
+  }
+  .packages-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .package-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 20px;
+    position: relative;
+  }
+  .package-card.featured { border-color: var(--gold); }
+  .package-tag {
+    position: absolute;
+    top: -11px;
+    left: 16px;
+    background: var(--gold);
+    color: #1a1200;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+  .package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .package-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+  }
+  .package-price {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .package-desc { font-size: 0.85rem; color: var(--fg2); line-height: 1.5; margin-bottom: 12px; }
+  .package-includes { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .package-includes li {
+    font-size: 0.83rem;
+    color: var(--fg2);
+    padding-left: 16px;
+    position: relative;
+  }
+  .package-includes li::before {
+    content: '♦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.55rem;
+    top: 5px;
+  }
+  .add-on-note {
+    margin-top: 24px;
+    padding: 16px 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    font-size: 0.87rem;
+    color: var(--fg2);
+    line-height: 1.6;
+  }
+  .add-on-note strong { color: var(--fg); }
+
+  /* ── BOOKING FORM ─────────────────────────── */
+  .form-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 20px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg2);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; /* 16px prevents iOS zoom */
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 13px 14px;
+    color: var(--fg);
+    transition: border-color 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { outline: none; border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-group select { appearance: none; cursor: pointer; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .rush-flag {
+    display: none;
+    font-size: 0.83rem;
+    color: var(--fg2);
+    line-height: 1.5;
+    background: rgba(201,168,76,0.1);
+    border-left: 3px solid var(--gold);
+    padding: 10px 12px;
+    border-radius: 2px;
+  }
+  .rush-flag.show { display: block; }
+  .rush-flag strong { color: var(--fg); }
+  .form-submit { width: 100%; max-width: none; padding: 16px; font-size: 1rem; margin-top: 4px; }
+  .form-note { font-size: 0.78rem; color: var(--fg2); margin-top: 14px; text-align: center; }
+  .form-success, .form-error {
+    display: none;
+    border-radius: 4px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .form-success {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--gold);
+  }
+  .form-success h3 { font-family: 'Playfair Display', serif; margin-bottom: 8px; color: var(--gold); }
+  .form-error {
+    background: rgba(180,60,40,0.08);
+    border: 1px solid rgba(180,60,40,0.5);
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  .form-error a { color: var(--gold); font-weight: 600; }
+
+  /* ── CONTACT ──────────────────────────────── */
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+  .contact-icon { color: var(--gold); font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+  .contact-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg2); margin-bottom: 4px; }
+  .contact-value { font-size: 1rem; color: var(--fg); font-weight: 500; }
+  .contact-value a { color: var(--gold); text-decoration: none; }
+  .service-areas {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .service-areas h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 14px; }
+  .area-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .area-list li { font-size: 0.88rem; color: var(--fg2); padding-left: 18px; position: relative; }
+  .area-list li::before { content: '♦'; position: absolute; left: 0; color: var(--gold); font-size: 0.55rem; top: 5px; }
+
+  /* ── FOOTER ───────────────────────────────── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 8px; }
+  .footer-tagline { font-size: 0.82rem; color: var(--fg2); margin-bottom: 20px; line-height: 1.5; }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .footer-links a { font-size: 0.82rem; color: var(--fg2); text-decoration: none; }
+  .footer-copy { font-size: 0.72rem; color: var(--fg2); }
+
+  /* ── GOLD DIVIDER ─────────────────────────── */
+  .gold-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    opacity: 0.5;
+    border-radius: 1px;
+  }
+  .why-bg .gold-divider { margin: 0 0 28px; opacity: 0.7; }
+
+  /* ── Section bridges ──────────────────────── */
+  .about-bridge {
+    display: block;
+    margin-top: 32px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 10px;
+  }
+
+  .book-top { padding-top: 28px; }
+  .book-more { text-align: center; margin-top: 28px; font-size: 0.9rem; }
+  .book-more a { color: var(--gold); font-weight: 600; text-decoration: none; }
+  nav { position: relative; }
+  .nav-wrap { position: relative; }
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2198484400767184');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
+/></noscript>
+
+<div class="nav-wrap">
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-brand">Buachie Entertainment</a>
+  <button class="hamburger" id="menuBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- SLIDE-DOWN DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="/#about">About</a>
+  <a href="/#why">Why Live Music</a>
+  <a href="/#packages">Packages</a>
+  <a href="#book" onclick="closeMenu()">Check My Date</a>
+  <a href="/#contact">Contact</a>
+</div>
+</div>
+
+<!-- BOOKING FORM -->
+<section id="book" class="book-top">
+  <div class="section-label">Booking</div>
+  <h2>Check Your Date</h2>
+  <div class="gold-divider"></div>
+  <p class="section-intro">Tell me about your wedding day and I'll follow up within 24 hours to confirm I'm available and answer any questions.</p>
+  <div class="form-card">
+    <form id="bookingForm" novalidate>
+      <div class="form-group">
+        <label for="fname">First Name *</label>
+        <input type="text" id="fname" name="fname" required placeholder="Jane" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name *</label>
+        <input type="text" id="lname" name="lname" required placeholder="Smith" autocomplete="family-name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required placeholder="jane@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(757) 555-0000" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label for="weddingDate">Wedding Date *</label>
+        <input type="date" id="weddingDate" name="weddingDate" required>
+        <p class="rush-flag" id="rushFlag"><strong>Rush booking:</strong> your date is less than 14 days away, so a +20% rush fee applies to your package. Include your song list in the notes below so I can start preparing right away.</p>
+      </div>
+      <div class="form-group">
+        <label for="venue">Venue / Location *</label>
+        <input type="text" id="venue" name="venue" required placeholder="Virginia Beach, VA">
+      </div>
+      <div class="form-group">
+        <label for="package">Package Interest *</label>
+        <select id="package" name="package" required>
+          <option value="" disabled selected>Select a package…</option>
+          <option value="Ceremony — $350 (no keyboard)">Ceremony — $350 (no keyboard provided)</option>
+          <option value="Ceremony + Keys — $400">Ceremony + Keys — $400</option>
+          <option value="Ceremony & Cocktail Hour — $800">Ceremony &amp; Cocktail Hour — $800</option>
+          <option value="Full Event — $2,000">Full Event — $2,000</option>
+          <option value="Not sure yet">Not sure yet — let's talk!</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="musicians">Additional Musicians?</label>
+        <select id="musicians" name="musicians">
+          <option value="None">No additional musicians</option>
+          <option value="Drummer (+$550)">+ Live Drummer (+$550)</option>
+          <option value="Vocalist (+$550)">+ Live Vocalist (+$550)</option>
+          <option value="Drummer & Vocalist (+$1,100)">+ Drummer &amp; Vocalist (+$1,100)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="songRequests">Song Requests / Notes</label>
+        <textarea id="songRequests" name="songRequests" placeholder="Processional song, first dance ideas, anything special you'd like…"></textarea>
+      </div>
+      <!-- Spam trap: real people never see or fill this -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="_honey">Leave blank</label>
+        <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
+      </div>
+      <button type="submit" class="btn form-submit" id="submitBtn">Check My Date</button>
+      <p class="form-note">I'll respond within 24 hours. No obligation to book.</p>
+      <div class="form-error" id="formError" role="alert"></div>
+    </form>
+    <div class="form-success" id="formSuccess" role="status">
+      <h3>Request Received! 🎹</h3>
+      <p>Thank you for reaching out. I'll be in touch within 24 hours to confirm availability and answer any questions about your special day.</p>
+    </div>
+  </div>
+  <p class="book-more">Want to see packages first? <a href="/#packages">View pricing &rarr;</a></p>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Buachie Entertainment</div>
+  <div class="footer-tagline">The music follows your moment.<br>Live wedding keyboard · Hampton Roads, Virginia</div>
+  <div class="footer-links">
+    <a href="/#about">About</a>
+    <a href="/#why">Why Live</a>
+    <a href="/#packages">Packages</a>
+    <a href="#book">Check My Date</a>
+    <a href="/#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Buachie Entertainment · Joshua Seth-Buachie · All rights reserved</div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('navDrawer');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    drawer.classList.toggle('open');
+  });
+  function closeMenu() {
+    btn.classList.remove('open');
+    drawer.classList.remove('open');
+  }
+
+  // Rush booking: weddings less than 14 days out
+  const RUSH_DAYS = 14;
+  const dateInput = document.getElementById('weddingDate');
+  const rushFlag = document.getElementById('rushFlag');
+  function isRush(value) {
+    if (!value) return false;
+    const [y, m, d] = value.split('-').map(Number);
+    const wedding = new Date(y, m - 1, d);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const days = Math.round((wedding - today) / 86400000);
+    return days >= 0 && days < RUSH_DAYS;
+  }
+  dateInput.addEventListener('change', () => {
+    rushFlag.classList.toggle('show', isRush(dateInput.value));
+  });
+
+  // Booking form — sends directly to buachieent@gmail.com via FormSubmit.
+  // Success only shows AFTER the request is confirmed sent.
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/buachieent@gmail.com';
+  const form = document.getElementById('bookingForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorBox = document.getElementById('formError');
+
+  function showError(html) {
+    errorBox.innerHTML = html;
+    errorBox.style.display = 'block';
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form));
+    if (data._honey) return; // bot
+
+    const rush = isRush(data.weddingDate);
+    const payload = {
+      _subject: `${rush ? 'RUSH — ' : ''}Wedding Inquiry — ${data.fname} ${data.lname} — ${data.weddingDate}`,
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: data.email,
+      Name: `${data.fname} ${data.lname}`,
+      Email: data.email,
+      Phone: data.phone || 'Not provided',
+      'Wedding Date': data.weddingDate + (rush ? '  ** RUSH BOOKING (+20%) **' : ''),
+      Venue: data.venue,
+      Package: data.package,
+      'Additional Musicians': data.musicians,
+      'Song Requests / Notes': data.songRequests || 'None',
+      Source: 'Booking page (/book)' + (location.search ? ' ' + location.search : '')
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false || json.success === 'false') throw new Error('send failed');
+
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      try { if (window.fbq) fbq('track', 'Lead', { content_name: data.package }); } catch (e) {}
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Check My Date';
+      showError('Sorry, your request didn\'t go through. Please text or call <a href="tel:7576060878">757-606-0878</a> or email <a href="mailto:buachieent@gmail.com">buachieent@gmail.com</a> and I\'ll get right back to you.');
+    }
+  });
+</script>
+</body>
+</html>
