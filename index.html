@@ -459,6 +459,8 @@
     line-height: 1.6;
   }
   .add-on-note strong { color: var(--fg); }
+  .add-on-note a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+  .package-price--quote { font-size: 1.05rem; white-space: nowrap; }
 
   /* ── BOOKING FORM ─────────────────────────── */
   .form-card {
@@ -684,8 +686,8 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
     <div class="highlight-item">
       <div class="highlight-icon">🎤</div>
       <div class="highlight-text">
-        <strong>Additional Musicians</strong>
-        Add a live drummer or vocalist to elevate any package
+        <strong>Solo Keys to Full Band</strong>
+        Add a live drummer and vocalists for a full-band experience
       </div>
     </div>
     <div class="highlight-item">
@@ -763,7 +765,7 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
     <div class="section-label">Pricing</div>
     <h2>Packages &amp; Pricing</h2>
     <div class="gold-divider"></div>
-    <p class="section-intro">Simple, transparent pricing — pick the coverage that fits your day. All packages include a complimentary dress rehearsal.</p>
+    <p class="section-intro">Solo keys to full band. Pick the coverage that fits your day — every package includes a complimentary dress rehearsal.</p>
     <div class="packages-grid">
       <div class="package-card">
         <div class="package-header">
@@ -816,9 +818,23 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
           <li>Dress rehearsal</li>
         </ul>
       </div>
+      <div class="package-card featured">
+        <div class="package-tag">Signature</div>
+        <div class="package-header">
+          <div class="package-name">Full Live Band</div>
+          <div class="package-price package-price--quote">Custom quote</div>
+        </div>
+        <div class="package-desc">Keys, drums, and live vocals — a band that follows your moments, from the aisle to the last dance. Built around your day, so every quote is tailored.</div>
+        <ul class="package-includes">
+          <li>Keys, live drummer &amp; vocalists</li>
+          <li>Custom arrangements of your songs</li>
+          <li>Ceremony, cocktail hour, or reception — your choice</li>
+          <li>Dress rehearsal</li>
+        </ul>
+      </div>
     </div>
     <div class="add-on-note">
-      <strong>Add a live musician to any package:</strong> Enhance your cocktail hour or reception with a live drummer or vocalist for an additional <strong>+$550 per musician</strong>.<br><br>
+      <strong>Full live band:</strong> Every band wedding is different, so I build each quote around your day. <a href="#book">Check your date</a> and choose “Full live band,” and I'll follow up within 24 hours.<br><br>
       <strong>Rush booking:</strong> Wedding less than 14 days away? I can still make it happen. A <strong>+20% rush fee</strong> applies to the package price to cover learning your music and clearing my schedule on short notice. Example: Ceremony $350 → $420.<br><br>
       <strong>Outside Hampton Roads:</strong> An additional $60 travel fee applies for events beyond the Hampton Roads area.
     </div>
@@ -866,16 +882,16 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
           <option value="Ceremony + Keys — $400">Ceremony + Keys — $400</option>
           <option value="Ceremony & Cocktail Hour — $800">Ceremony &amp; Cocktail Hour — $800</option>
           <option value="Full Event — $2,000">Full Event — $2,000</option>
+          <option value="Full Live Band — custom quote">Full Live Band — custom quote</option>
           <option value="Not sure yet">Not sure yet — let's talk!</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="musicians">Additional Musicians?</label>
+        <label for="musicians">Want a band?</label>
         <select id="musicians" name="musicians">
-          <option value="None">No additional musicians</option>
-          <option value="Drummer (+$550)">+ Live Drummer (+$550)</option>
-          <option value="Vocalist (+$550)">+ Live Vocalist (+$550)</option>
-          <option value="Drummer & Vocalist (+$1,100)">+ Drummer &amp; Vocalist (+$1,100)</option>
+          <option value="None">Solo keys</option>
+          <option value="Full live band (custom quote)">Full live band — keys, drums &amp; vocals (custom quote)</option>
+          <option value="Not sure — tell me more">Not sure — tell me more</option>
         </select>
       </div>
       <div class="form-group">
