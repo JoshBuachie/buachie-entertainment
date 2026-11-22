@@ -329,10 +329,11 @@
   .invest .display { font-size: clamp(2.2rem, 4.4vw, 3.6rem); margin: 22px 0 24px; }
   .invest-intro p { color: var(--ivory2); max-width: 38ch; }
   .tiers { list-style: none; border-top: 1px solid var(--line); }
-  .tiers li { padding: 26px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 6px 24px; align-items: baseline; }
+  .tiers li { padding: 26px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+  .invest-cta { margin-top: 36px; }
   .tier-name { font-family: var(--serif); font-size: clamp(1.35rem, 2.2vw, 1.7rem); font-weight: 400; color: var(--ivory); }
   .tier-price { font-family: var(--serif); font-size: clamp(1.2rem, 2vw, 1.45rem); color: var(--gold-hi); font-variant-numeric: lining-nums; white-space: nowrap; }
-  .tier-desc { grid-column: 1 / -1; font-size: .88rem; color: var(--mute); }
+  .tier-desc { font-size: .88rem; color: var(--mute); }
   .tiers li.band-tier .tier-name { font-style: italic; }
   .fine { margin-top: 30px; font-size: .8rem; color: var(--mute); line-height: 1.8; }
   .fine strong { color: var(--ivory2); font-weight: 500; }
@@ -438,7 +439,7 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
   <nav class="nav-links" aria-label="Primary">
     <a href="#story">The Approach</a>
     <a href="#experiences">Experiences</a>
-    <a href="#investment">Investment</a>
+    <a href="#investment">Collections</a>
     <div class="social social-nav"><a href="https://instagram.com/sethbuachie" target="_blank" rel="noopener" aria-label="Buachie Entertainment on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg></a><a href="https://www.facebook.com/buachieentertainment" target="_blank" rel="noopener" aria-label="Buachie Entertainment on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.5V21h3.1z" fill="currentColor"/></svg></a></div>
     <a href="#inquire" class="nav-cta">Check Availability</a>
   </nav>
@@ -447,7 +448,7 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
 <div class="drawer" id="drawer">
   <a href="#story">The Approach</a>
   <a href="#experiences">Experiences</a>
-  <a href="#investment">Investment</a>
+  <a href="#investment">Collections</a>
   <a href="#inquire" class="gold">Check Availability</a>
   <div class="social "><a href="https://instagram.com/sethbuachie" target="_blank" rel="noopener" aria-label="Buachie Entertainment on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg></a><a href="https://www.facebook.com/buachieentertainment" target="_blank" rel="noopener" aria-label="Buachie Entertainment on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.5V21h3.1z" fill="currentColor"/></svg></a></div>
 </div>
@@ -566,22 +567,21 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
 <section class="band band-ink2" id="investment">
   <div class="wrap invest">
     <div class="invest-intro reveal">
-      <div class="eyebrow">Investment</div>
-      <h2 class="display">Collections</h2>
-      <p>Every collection includes a complimentary dress rehearsal and songs arranged for your day.</p>
+      <div class="eyebrow">Collections</div>
+      <h2 class="display">Tailored to <em>your day.</em></h2>
+      <p>No two celebrations are the same, so every proposal is built around yours: the moments you want covered, the songs that matter, and whether you want solo piano or a full band. Every collection includes a complimentary dress rehearsal.</p>
     </div>
     <div class="reveal">
       <ul class="tiers">
-        <li><span class="tier-name">The Ceremony</span><span class="tier-price">$500</span><span class="tier-desc">Prelude, processional and recessional on the venue's piano or keyboard.</span></li>
-        <li><span class="tier-name">The Ceremony, with Piano</span><span class="tier-price">$550</span><span class="tier-desc">The full ceremony, with my own instrument brought and set up.</span></li>
-        <li><span class="tier-name">Ceremony &amp; Cocktail Hour</span><span class="tier-price">$800</span><span class="tier-desc">The ceremony, plus solo piano through cocktail hour.</span></li>
-        <li><span class="tier-name">The Full Evening</span><span class="tier-price">$2,000</span><span class="tier-desc">Ceremony, cocktail hour and reception, from start to finish.</span></li>
-        <li class="band-tier"><span class="tier-name">The Live Band</span><span class="tier-price">By consultation</span><span class="tier-desc">Keys, drums and live vocals, quoted around your day.</span></li>
+        <li><span class="tier-name">The Ceremony</span><span class="tier-desc">Prelude, processional and recessional, on the venue's piano or with my own instrument brought and set up.</span></li>
+        <li><span class="tier-name">Ceremony &amp; Cocktail Hour</span><span class="tier-desc">The ceremony, plus solo piano through cocktail hour.</span></li>
+        <li><span class="tier-name">The Full Evening</span><span class="tier-desc">Ceremony, cocktail hour and reception, from start to finish.</span></li>
+        <li class="band-tier"><span class="tier-name">The Live Band</span><span class="tier-desc">Keys, drums and live vocals, built around your day.</span></li>
       </ul>
       <p class="fine">
-        <strong>Within 14 days of your date?</strong> I can often still make it happen. A 20% rush fee applies to cover learning your music on short notice.<br>
-        <strong>Beyond Hampton Roads,</strong> a $60 travel fee applies.
+        Short-notice dates and celebrations beyond Hampton Roads are welcome. Any timing or travel details are included in your proposal.
       </p>
+      <div class="invest-cta"><a href="#inquire" class="btn">Request a Proposal</a></div>
     </div>
   </div>
 </section>
@@ -611,16 +611,15 @@ src="https://www.facebook.com/tr?id=2198484400767184&ev=PageView&noscript=1"
             <input type="date" id="weddingDate" name="weddingDate" required>
           </div>
           <div class="field"><label for="venue">Venue / location *</label><input type="text" id="venue" name="venue" required placeholder="Venue name, city"></div>
-          <p class="rush-flag full" id="rushFlag"><strong>Rush booking:</strong> your date is less than 14 days away, so a 20% rush fee applies. Include your song list below so I can start preparing right away.</p>
+          <p class="rush-flag full" id="rushFlag"><strong>Short notice:</strong> your date is less than 14 days away. I can often still make it happen, and a rush fee applies. Include your song list below so I can start preparing right away.</p>
           <div class="field">
             <label for="package">Collection *</label>
             <select id="package" name="package" required>
               <option value="" disabled selected>Select…</option>
-              <option value="Ceremony — $500 (no keyboard)">The Ceremony: $500</option>
-              <option value="Ceremony + Keys — $550">The Ceremony, with Piano: $550</option>
-              <option value="Ceremony & Cocktail Hour — $800">Ceremony &amp; Cocktail Hour: $800</option>
-              <option value="Full Event — $2,000">The Full Evening: $2,000</option>
-              <option value="Full Live Band — custom quote">The Live Band: by consultation</option>
+              <option value="Ceremony">The Ceremony</option>
+                            <option value="Ceremony & Cocktail Hour">Ceremony &amp; Cocktail Hour</option>
+              <option value="Full Evening">The Full Evening</option>
+              <option value="Full Live Band">The Live Band</option>
               <option value="Not sure yet">Not sure yet. Let's talk.</option>
             </select>
           </div>
